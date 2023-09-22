@@ -5,8 +5,8 @@
 
 
 {
-//"spider":"./JAR/ali.jar",
-//"spider":"./JAR/ts.jar",
+//"spider":"./JAR/fm.jar",
+//"spider":"./JAR/custom_spider.jar",
 //"spider":"./JAR/cs.jar",
 "spider":"./JAR/Yoursmile.jar",
 //"spider":"./JAR/Yoursmile2.jar",
