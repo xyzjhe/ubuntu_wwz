@@ -103,15 +103,6 @@
 {"key":"drpy_js_菜狗","name":"官源👒搜狗","type":3,"api":"./lib/drpy2.min.js","ext":"./js/菜狗.js"},
 {"key":"drpy_js_优酷","name":"官源👒优酷","type":3,"api":"./lib/drpy2.min.js","ext":"./js/优酷.js"},
 
-{"key":"Gitcafe", "name": "阿里👒纸条", "type": 3, "api": "csp_Gitcafe", "searchable": 1, "quickSearch": 1, "filterable": 0, "ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
-{"key":"小紙條", "name": "阿里👒小紙條", "type": 3, "api": "csp_XiaoZhiTiao", "searchable": 1, "quickSearch": 1, "filterable": 0, "ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
-{"key":"csp_Hdhive","name":"阿里👒Hdhive", "type":3,"api":"csp_Hdhive","searchable":1,"quickSearch":1,"filterable":1,"ext":"http://127.0.0.1:9978/file/tvfan/token.json" , "timeout":30},
-{"key":"七夜","name":"阿里👒七夜", "type":3,"api":"csp_Dovx","searchable":1,"changeable":0,"ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
-{"key":"盤搜索","name":"阿里👒盤搜索", "type":3,"api":"csp_PanSearch","searchable":1,"changeable":0,"ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
-{"key":"找資源","name":"阿里👒找資源", "type":3,"api":"csp_Zhaozy","searchable":1,"changeable":0,"ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
-{"key":"易搜","name":"阿里👒易搜", "type":3,"api":"csp_YiSo","ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
-{"key":"盘搜","name":"阿里👒盘搜", "type":3,"api":"csp_PanSou","ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
-{"key":"UP云搜","name":"阿里👒up云搜", "type":3,"api":"csp_UpYun","ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
 
 {"key":"drpy_js_4KHDR","name":"磁力👒4KHDR","type":3,"api":"./lib/drpy2.min.js","ext":"./js/4khdr.js","playerType":"1", "searchable":1, "quickSearch":1, "changeable":1, "timeout":30},
 {"key":"drpy_js_极影网","name":"磁力👒极影网","type":3,"api":"./lib/drpy2.min.js","ext":"./js/jiyingw.js","playerType":"1", "searchable":1, "quickSearch":1, "changeable":1, "timeout":30},
@@ -127,35 +118,29 @@
 {"key":"drpy_js_97tvs","name":"影视👒97tvs","type":3,"api":"./lib/drpy2.min.js","ext":"./js/97tvs.js", "quickSearch":1, "changeable":1, "timeout":30}, 
 {"key":"drpy_js_rrdyw","name":"影视👒rrdyw","type":3,"api":"./lib/drpy2.min.js","ext":"./js/rrdyw.js", "quickSearch":1, "changeable":1, "timeout":30}, 
 {"key":"drpy_js_meow","name":"影视👒meow","type":3,"api":"./lib/drpy2.min.js","ext":"./js/meow.js", "quickSearch":1, "changeable":1, "timeout":30}, 
-{"key":"drpy_js_kkpans","name":"夸克👒kk盘","type":3,"api":"./lib/drpy2.min.js","ext":"./js/kkpans.js", "quickSearch":1, "changeable":1, "timeout":30},
+
 {"key":"drpy_js_校长影视","name":"夸克👒校长影视","type":3,"api":"./lib/drpy2.min.js","ext":"./js/xzys.js", "quickSearch":1, "changeable":1, "timeout":30},
 {"key":"drpy_js_yyets","name":"夸克👒人人影视搜","type":3,"api":"./lib/drpy2.min.js","ext":"./js/yyets.js", "quickSearch":1, "changeable":1, "timeout":30},
-{"key":"drpy_js_奇妙搜[夸]","name":"夸克👒奇妙搜","type":3,"api":"./lib/drpy2.min.js","ext":"./js/qimiao.js", "quickSearch":1, "changeable":1, "timeout":30},
-{"key":"drpy_js_愛盤搜","name":"夸克👒爱盘搜","type":3,"api":"./lib/drpy2.min.js","ext":"./js/aipanso.js", "quickSearch":1, "changeable":1, "timeout":30},
-{"key":"drpy_js_趣盤搜","name":"夸克👒趣盘搜","type":3,"api":"./lib/drpy2.min.js","ext":"./js/funletu.js", "quickSearch":1, "changeable":1, "timeout":30},
-{"key":"push_agent","name":"手机👒推送", "type":3,"api":"csp_Push","searchable":0,"quickSearch":0,"changeable":0,"ext":"http://127.0.0.1:9978/file/tvfan/token.json", "timeout":30},
+
 
 {"key":"drpy_js_磁力熊[磁]","name":"磁力👒磁力熊","type":3,"api":"./lib/drpy2.min.js","searchable":1,"quickSearch":1,"changeable":0,"ext":"./js/磁力熊[磁].js", "timeout":30},
 {"key":"drpy_js_6V新版[磁]","name":"磁力👒6V新版","type":3,"api":"./lib/drpy2.min.js","searchable":1,"quickSearch":1,"changeable":0,"ext":"./js/6V新版[磁].js", "timeout":30},
 {"key":"drpy_js_童趣","name":"少儿👒童趣","type":3,"api":"./lib/drpy2.min.js","changeable":0,"style":{"type":"rect","ratio":1.597},"ext":"./js/童趣.js"},
 {"key":"drpy_js_兔小贝","name":"少儿👒兔小贝","type":3,"api":"./lib/drpy2.min.js","style":{"type":"rect","ratio":1.597},"changeable":0,"ext":"./js/兔小贝.js"},
 {"key":"drpy_js_有声绘本网","name":"少儿👒有声绘本","type":3,"api":"./lib/drpy2.min.js","changeable":0,"style":{"type":"rect","ratio":1},"ext":"./js/有声绘本网.js"},
-{"key":"drpy_js_我的哔哩","name":"弹幕👒哔哩合集","type":3,"api":"./lib/drpy2.min.js","recordable":0,"style":{"type":"rect","ratio":1.597},"changeable":0,"ext":"./js/我的哔哩.js"},
-{"key":"drpy_js_哔哩直播","name":"弹幕👒哔哩直播","type":3,"api":"./lib/drpy2.min.js","style":{"type":"rect","ratio":1.597},"changeable":0,"ext":"./js/哔哩直播.js"},
-{"key":"drpy_js_斗鱼直播","name":"直播👒斗鱼","type":3,"api":"./lib/drpy2.min.js","style":{"type":"rect","ratio":1.597},"changeable":0,"ext":"./js/斗鱼直播.js"},
-{"key":"drpy_js_虎牙直播","name":"直播👒虎牙","type":3,"api":"./lib/drpy2.min.js","style":{"type":"rect","ratio":1.597},"changeable":0,"ext":"./js/虎牙直播.js"},
+
+
 {"key":"drpy_js_JustLive","name":"直播👒JustLive","type":3,"api":"./lib/drpy2.min.js","style":{"type":"rect","ratio":1.597},"changeable":0,"ext":"./js/JustLive.js"},
 {"key":"drpy_js_310直播","name":"体育👒310直播","type":3,"api":"./lib/drpy2.min.js","changeable":0,"style":{"type":"rect","ratio":1},"ext":"./js/310直播.js"},
 {"key":"drpy_js_88看球","name":"体育👒88看球","type":3,"api":"./lib/drpy2.min.js","changeable":0,"style":{"type":"rect","ratio":1},"ext":"./js/88看球.js"},
 {"key":"drpy_js_JRKAN直播","name":"体育👒JRKAN直播","type":3,"api":"./lib/drpy.min.js","changeable":0,"style":{"type":"rect","ratio":1},"ext":"./js/JRKAN直播.js"},
 {"key":"drpy_js_抓饭体育","name":"体育👒抓饭体育","type":3,"api":"./lib/drpy.min.js","changeable":0,"style":{"type":"rect","ratio":1},"ext":"./js/抓饭体育.js"},
 {"key":"drpy_js_好趣网","name":"电视👒好趣网","type":3,"api":"./lib/drpy2.min.js","style":{"type":"rect","ratio":1.333},"changeable":0,"ext":"./js/好趣网.js"},
-{"key":"drpy_js_直播大全","name":"电视👒直播大全","type":3,"api":"./lib/live2cms.js","recordable":0,"style":{ "type":"oval"},"changeable":0,"ext":"./js/live2mv_data.json"},
+
 {"key":"MV_vod","name":"MV👒卡拉OK","type":1,"api":"https://tvbox-mv--leosam2048.repl.co/mv/vod","changeable":0,"style":{"type":"oval"}},
 {"key":"drpy_js_相声随身听","name":"相声👒相声随身听","type":3,"api":"./lib/drpy2.min.js","changeable":0,"ext":"./js/相声随身听.js"},
 {"key":"drpy_js_评书随身听","name":"评书👒评书随身听","type":3,"api":"./lib/drpy2.min.js","changeable":0,"ext":"./js/评书随身听.js"},
 {"key":"drpy_js_武享吧","name":"格斗👒武享吧","type":3,"api":"./lib/drpy2.min.js","changeable":0,"ext":"./js/武享吧.js"},
-{"key":"drpy_js_Alist","name":"网盘👒Alist","type":3,"api":"./lib/alist.min.js","changeable":0,"ext":"./js/alist.json"},
 
 {"key":"drpy_js_58动漫","name":"动漫👒58动漫","type":3,"api":"./lib/drpy2.min.js","ext":"./js/58动漫.js"},
 {"key":"drpy_js_AGE动漫","name":"动漫👒AGE动漫","type":3,"api":"./lib/drpy2.min.js","ext":"./js/AGE动漫.js"},
