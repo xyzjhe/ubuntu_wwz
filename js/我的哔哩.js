@@ -1,36 +1,36 @@
-/* 直播弹幕 -> vod_area:'bilidanmu'
-目前只有皮皮虾大佬的DMBox, 支持弹幕
-DMBox下载:https://t.me/pipixiawerun
-设置 > 窗口预览 > 开启
-*/
-
-/* Cookie设置
-Cookie改为预设获取蜂蜜大佬Github的
-https://ghproxy.net/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/txt/cookie.txt
-
-Cookie获取方法
-https://ghproxy.net/https://raw.githubusercontent.com/UndCover/PyramidStore/main/list.md
-
-Cookie设置方法1: DR-PY 后台管理界面
-CMS后台管理 > 设置中心 > 环境变量 > {"bili_cookie":"XXXXXXX","vmid":"XXXXXX"} > 保存
-
-Cookie设置方法2: 手动替换Cookie
-底下代码 headers的
-"Cookie":"$bili_cookie"
-手动替换为
-"Cookie":"将获取的Cookie黏贴在这"
-*/
+/**
+ * 已知问题：
+    * [推荐]页面：'雷电模拟器'播放部份影片会出错，'播放器'改成'ijk' & '解码方式'改成'软解'，即可正常播放
+ * 影视TV 弹幕支持
+    * https://t.me/fongmi_offical/
+    * https://github.com/FongMi/Release/tree/main/apk
+ * 皮皮虾DMBox 弹幕支持
+    * 设置 > 窗口预览 > 开启
+    * https://t.me/pipixiawerun
+    * vod_area:'bilidanmu'
+ * Cookie设置
+    * Cookie获取方法 https://ghproxy.net/https://raw.githubusercontent.com/UndCover/PyramidStore/main/list.md
+ * Cookie设置方法1: DR-PY 后台管理界面
+    * CMS后台管理 > 设置中心 > 环境变量 > {"bili_cookie":"XXXXXXX","vmid":"XXXXXX"} > 保存
+ * Cookie设置方法2: 手动替换Cookie
+    * 底下代码 headers的
+    * "Cookie":"$bili_cookie"
+    * 手动替换为
+    * "Cookie":"将获取的Cookie黏贴在这"
+ */
 
 var rule = {
     title:'我的哔哩',
     host:'https://api.bilibili.com',
-    homeUrl:'/x/web-interface/search/type?search_type=video&keyword=小姐姐4K&page=1',
+    // homeUrl:'/x/web-interface/search/type?search_type=video&keyword=小姐姐4K&page=1',
+    homeUrl:'/x/web-interface/ranking/v2?rid=0&type=origin', // 排行 > 排行榜 > 原创
     url:'/x/web-interface/search/type?search_type=videofyfilter',
-    class_name:'经典无损音乐合集&帕梅拉&太极拳&健身&舞蹈&音乐&歌曲&MV&演唱会&白噪音&知名UP主&说案&解说&演讲&时事&探索发现&纪录片&平面设计教学&软件教程&实用教程&旅游&风景&食谱&美食&搞笑&球星&动物世界&相声小品&戏曲&儿童&小姐姐&热门&旅行探险',
-    class_url:'经典无损音乐合集&帕梅拉&太极拳&健身&舞蹈&音乐&歌曲&MV4K&演唱会4K&白噪音4K&知名UP主&说案&解说&演讲&时事&探索发现超清&纪录片超清&平面设计教学&软件教程&实用教程&旅游&风景4K&食谱&美食超清&搞笑&球星&动物世界超清&相声小品&戏曲&儿童&小姐姐4K&热门&旅行探险',
+    class_name:'推荐&经典无损音乐合集&帕梅拉&太极拳&健身&舞蹈&音乐&歌曲&MV&演唱会&白噪音&知名UP主&说案&解说&演讲&时事&探索发现&纪录片&平面设计教学&软件教程&实用教程&旅游&风景&食谱&美食&搞笑&球星&动物世界&相声小品&热门&旅行探险',
+    class_url:'推荐&经典无损音乐合集&帕梅拉&太极拳&健身&舞蹈&音乐&歌曲&MV4K&演唱会4K&白噪音4K&知名UP主&说案&解说&演讲&时事&探索发现超清&纪录片超清&平面设计教学&软件教程&实用教程&旅游&风景4K&食谱&美食超清&搞笑&球星&动物世界超清&相声小品&热门&旅行探险',
     filterable: 1,
     filter_url: '&keyword={{fl.tid}}&page=fypage&duration={{fl.duration}}&order={{fl.order}}',
     filter_def:{
+        推荐:{tid:'推荐'},
         经典无损音乐合集:{tid:'经典无损音乐合集'},
         帕梅拉:{tid:'帕梅拉'},
         太极拳:{tid:'太极拳'},
@@ -59,9 +59,6 @@ var rule = {
         球星:{tid:'球星'},
         动物世界超清:{tid:'动物世界超清'},
         相声小品:{tid:'相声小品'},
-        戏曲:{tid:'戏曲'},
-        儿童:{tid:'儿童'},
-        小姐姐4K:{tid:'小姐姐4K'},
         热门:{tid:'热门'},
         旅行探险:{tid:'旅行探险'}
     },
@@ -70,7 +67,6 @@ var rule = {
         "帕梅拉":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"帕梅拉"},{"n":"瘦腿","v":"帕梅拉瘦腿"},{"n":"腹部","v":"帕梅拉腹部"},{"n":"手臂","v":"帕梅拉手臂"},{"n":"热身","v":"帕梅拉热身"},{"n":"舞蹈","v":"帕梅拉舞蹈"},{"n":"燃脂","v":"帕梅拉燃脂"},{"n":"有氧","v":"帕梅拉有氧"},{"n":"拉伸","v":"帕梅拉拉伸"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
         "太极拳":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"太极拳"},{"n":"邱慧芳","v":"太极拳邱慧芳"},{"n":"陈氏","v":"太极拳陈氏"},{"n":"武当","v":"太极拳武当"},{"n":"二十四式","v":"太极拳二十四式"},{"n":"三十六式","v":"太极拳三十六式"},{"n":"五禽戏","v":"五禽戏"},{"n":"八段锦","v":"八段锦"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
         "健身":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"健身"},{"n":"瘦腿","v":"健身瘦腿"},{"n":"腹部","v":"健身腹部"},{"n":"手臂","v":"健身手臂"},{"n":"热身","v":"健身热身"},{"n":"燃脂","v":"健身燃脂"},{"n":"有氧","v":"健身有氧"},{"n":"拉伸","v":"健身拉伸"},{"n":"军体拳第一套","v":"军体拳第一套"},{"n":"军体拳第二套","v":"军体拳第二套"},{"n":"军体拳第三套","v":"军体拳第三套"},{"n":"帕梅拉","v":"帕梅拉"},{"n":"广场舞","v":"广场舞"},{"n":"瑜伽","v":"瑜伽"},{"n":"冥想","v":"冥想"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
-        "舞蹈":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"舞蹈"},{"n":"古典舞","v":"古典舞"},{"n":"芭蕾舞","v":"芭蕾舞"},{"n":"民族舞","v":"民族舞"},{"n":"现代舞","v":"现代舞"},{"n":"踢踏舞","v":"踢踏舞"},{"n":"爵士舞","v":"爵士舞"},{"n":"拉丁舞","v":"拉丁舞"},{"n":"摩登舞","v":"摩登舞"},{"n":"街舞","v":"街舞"},{"n":"广场舞","v":"广场舞"},{"n":"宅舞","v":"宅舞"},{"n":"肚皮舞","v":"肚皮舞"},{"n":"钢管舞","v":"钢管舞"},{"n":"迪斯科","v":"迪斯科"},{"n":"劲舞","v":"热舞劲舞"},{"n":"独舞","v":"独舞"},{"n":"双人舞","v":"双人舞"},{"n":"三人舞","v":"三人舞"},{"n":"群舞","v":"群舞"},{"n":"组舞","v":"组舞"},{"n":"舞剧","v":"舞剧"},{"n":"电影歌舞","v":"电影歌舞"},{"n":"国风舞蹈","v":"国风舞蹈"},{"n":"河卫国风","v":"河南卫视国风"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
         "歌曲":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"歌曲超清"},{"n":"歌曲合集","v":"经典无损音乐合集"},{"n":"歌曲热榜","v":"2022年歌曲排行榜"},{"n":"香港歌曲","v":"香港歌曲"},{"n":"台湾歌曲","v":"台湾歌曲"},{"n":"内地歌曲","v":"内地歌曲"},{"n":"粤语歌曲","v":"粤语歌曲"},{"n":"闽南歌曲","v":"闽南语歌曲"},{"n":"英文歌曲","v":"英文歌曲"},{"n":"日文歌曲","v":"日文歌曲"},{"n":"印度歌曲","v":"印度歌曲"},{"n":"韩国歌曲","v":"韩国歌曲"},{"n":"小语种歌曲","v":"小语种歌曲"},{"n":"经典老歌","v":"经典老歌"},{"n":"抖音热歌","v":"抖音热歌"},{"n":"网红翻唱","v":"网红翻唱"},{"n":"劲歌","v":"劲歌"},{"n":"慢歌","v":"慢歌"},{"n":"古风","v":"古风歌曲"},{"n":"舞曲","v":"DJ歌曲"},{"n":"欢快歌曲","v":"欢快歌曲"},{"n":"伤感歌曲","v":"伤感歌曲"},{"n":"70年代歌曲","v":"70年代歌曲"},{"n":"80年代歌曲","v":"80年代歌曲"},{"n":"90年代歌曲","v":"90年代歌曲"},{"n":"00年代歌曲","v":"00年代歌曲"},{"n":"10年代歌曲","v":"10年代歌曲"},{"n":"2020年歌曲","v":"2020年歌曲"},{"n":"2021年歌曲","v":"2021年歌曲"},{"n":"2022年歌曲","v":"2022年歌曲"},{"n":"经典儿歌","v":"经典儿歌"},{"n":"大合唱","v":"大合唱"},{"n":"音乐汇","v":"音乐汇"},{"n":"美声歌曲","v":"美声歌曲"},{"n":"通俗歌曲","v":"通俗歌曲"},{"n":"民族歌曲","v":"民族歌曲"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
         "音乐":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"音乐4K"},{"n":"钢琴","v":"钢琴曲"},{"n":"小提琴","v":"小提音乐"},{"n":"手风琴","v":"手风音乐"},{"n":"二胡","v":"二胡音乐"},{"n":"古筝","v":"古筝音乐"},{"n":"笛子","v":"笛子音乐"},{"n":"琵琶","v":"琵琶音乐"},{"n":"古琴","v":"古琴音乐"},{"n":"编钟","v":"编钟音乐"},{"n":"协奏曲","v":"协奏曲"},{"n":"中国古风音乐","v":"中国古风音乐"},{"n":"背景音乐","v":"背景音乐"},{"n":"助眠音乐","v":"助眠音乐"},{"n":"胎教音乐","v":"胎教音乐"},{"n":"芭蕾舞曲","v":"芭蕾舞曲"},{"n":"拉丁舞曲","v":"拉丁舞曲"},{"n":"爵士舞曲","v":"爵士舞曲"},{"n":"摩登舞曲","v":"摩登舞曲"},{"n":"DJ舞曲","v":"DJ舞曲"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
         "MV4K":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"MV4K"},{"n":"A阿杜","v":"阿杜MV4K"},{"n":"A阿黛尔","v":"阿黛尔MV4K"},{"n":"BBeyond","v":"BeyondMV4K"},{"n":"BBy2","v":"By2MV4K"},{"n":"BBIGBANG","v":"BIGBANGMV4K"},{"n":"B布兰妮","v":"布兰妮MV4K"},{"n":"C陈奕迅","v":"陈奕迅MV4K"},{"n":"C蔡依林","v":"蔡依林MV4K"},{"n":"C初音未来","v":"初音未来MV4K"},{"n":"C蔡健雅","v":"蔡健雅MV4K"},{"n":"C陈小春","v":"陈小春MV4K"},{"n":"C草蜢","v":"草蜢MV4K"},{"n":"C陈慧娴","v":"陈慧娴MV4K"},{"n":"C崔健","v":"崔健MV4K"},{"n":"C仓木麻衣","v":"仓木麻衣MV4K"},{"n":"D戴荃","v":"戴荃MV4K"},{"n":"D动力火车","v":"动力火车MV4K"},{"n":"D邓丽君","v":"邓丽君MV4K"},{"n":"D丁当","v":"丁当MV4K"},{"n":"D刀郎","v":"刀郎MV4K"},{"n":"D邓紫棋","v":"邓紫棋MV4K"},{"n":"D戴佩妮","v":"戴佩妮MV4K"},{"n":"D邓丽君","v":"邓丽君MV4K"},{"n":"F飞儿乐队","v":"飞儿乐队MV4K"},{"n":"F费玉清","v":"费玉清MV4K"},{"n":"F费翔","v":"费翔MV4K"},{"n":"F方大同","v":"方大同MV4K"},{"n":"F房东的猫","v":"房东的猫MV4K"},{"n":"F凤飞飞","v":"凤飞飞MV4K"},{"n":"F凤凰传奇","v":"凤凰传奇MV4K"},{"n":"G古风歌曲","v":"古风歌曲4K"},{"n":"G国乐大典","v":"国乐大典4K"},{"n":"G郭采洁","v":"郭采洁MV4K"},{"n":"G光良","v":"光良MV4K"},{"n":"G郭静","v":"郭静MV4K"},{"n":"G郭富城","v":"郭富城MV4K"},{"n":"H胡彦斌","v":"胡彦斌MV4K"},{"n":"H胡夏","v":"胡夏MV4K"},{"n":"H韩红","v":"韩红MV4K"},{"n":"H黄品源","v":"黄品源MV4K"},{"n":"H黄小琥","v":"黄小琥MV4K"},{"n":"H花儿乐队","v":"花儿乐队MV4K"},{"n":"H黄家强","v":"黄家强MV4K"},{"n":"H后街男孩","v":"后街男孩MV4K"},{"n":"J经典老歌","v":"经典老歌4K"},{"n":"J贾斯丁比伯","v":"贾斯丁比伯MV4K"},{"n":"J金池","v":"金池MV4K"},{"n":"J金志文","v":"金志文MV4K"},{"n":"J焦迈奇","v":"焦迈奇MV4K"},{"n":"K筷子兄弟","v":"筷子兄弟MV4K"},{"n":"L李玟","v":"李玟MV4K"},{"n":"L林忆莲","v":"林忆莲MV4K"},{"n":"L李克勤","v":"李克勤MV4K"},{"n":"L刘宪华","v":"刘宪华MV4K"},{"n":"L李圣杰","v":"李圣杰MV4K"},{"n":"L林宥嘉","v":"林宥嘉MV4K"},{"n":"L梁静茹","v":"梁静茹MV4K"},{"n":"L李健","v":"李健MV4K"},{"n":"L林俊杰","v":"林俊杰MV4K"},{"n":"L李玉刚","v":"李玉刚MV4K"},{"n":"L林志炫","v":"林志炫MV4K"},{"n":"L李荣浩","v":"李荣浩MV4K"},{"n":"L李宇春","v":"李宇春MV4K"},{"n":"L洛天依","v":"洛天依MV4K"},{"n":"L林子祥","v":"林子祥MV4K"},{"n":"L李宗盛","v":"李宗盛MV4K"},{"n":"L黎明","v":"黎明MV4K"},{"n":"L刘德华","v":"刘德华MV4K"},{"n":"L罗大佑","v":"罗大佑MV4K"},{"n":"L林肯公园","v":"林肯公园MV4K"},{"n":"LLadyGaga","v":"LadyGagaMV4K"},{"n":"L旅行团乐队","v":"旅行团乐队MV4K"},{"n":"M莫文蔚","v":"莫文蔚MV4K"},{"n":"M毛不易","v":"毛不易MV4K"},{"n":"M梅艳芳","v":"梅艳芳MV4K"},{"n":"M迈克尔杰克逊","v":"迈克尔杰克逊MV4K"},{"n":"N南拳妈妈","v":"南拳妈妈MV4K"},{"n":"P朴树","v":"朴树MV4K"},{"n":"Q齐秦","v":"齐秦MV4K"},{"n":"Q青鸟飞鱼","v":"青鸟飞鱼MV4K"},{"n":"R容祖儿","v":"容祖儿MV4K"},{"n":"R热歌","v":"热歌MV4K"},{"n":"R任贤齐","v":"任贤齐MV4K"},{"n":"S水木年华","v":"水木年华MV4K"},{"n":"S孙燕姿","v":"孙燕姿MV4K"},{"n":"S苏打绿","v":"苏打绿MV4K"},{"n":"SSHE","v":"SHEMV4K"},{"n":"S孙楠","v":"孙楠MV4K"},{"n":"T陶喆","v":"陶喆MV4K"},{"n":"T谭咏麟","v":"谭咏麟MV4K"},{"n":"T田馥甄","v":"田馥甄MV4K"},{"n":"T谭维维","v":"谭维维MV4K"},{"n":"T逃跑计划","v":"逃跑计划MV4K"},{"n":"T田震","v":"田震MV4K"},{"n":"T谭晶","v":"谭晶MV4K"},{"n":"T屠洪刚","v":"屠洪刚MV4K"},{"n":"T泰勒·斯威夫特","v":"泰勒·斯威夫特MV4K"},{"n":"W王力宏","v":"王力宏MV4K"},{"n":"W王杰","v":"王杰MV4K"},{"n":"W吴克群","v":"吴克群MV4K"},{"n":"W王心凌","v":"王心凌MV4K"},{"n":"W汪峰","v":"汪峰MV4K"},{"n":"W伍佰","v":"伍佰MV4K"},{"n":"W王菲","v":"王菲MV4K"},{"n":"W五月天","v":"五月天MV4K"},{"n":"W汪苏泷","v":"汪苏泷MV4K"},{"n":"X徐佳莹","v":"徐佳莹MV4K"},{"n":"X弦子","v":"弦子MV4K"},{"n":"X萧亚轩","v":"萧亚轩MV4K"},{"n":"X许巍","v":"许巍MV4K"},{"n":"X薛之谦","v":"薛之谦MV4K"},{"n":"X许嵩","v":"许嵩MV4K"},{"n":"X小虎队","v":"小虎队MV4K"},{"n":"X萧敬腾","v":"萧敬腾MV4K"},{"n":"X谢霆锋","v":"谢霆锋MV4K"},{"n":"X徐小凤","v":"徐小凤MV4K"},{"n":"X信乐队","v":"信乐队MV4K"},{"n":"Y夜愿乐队","v":"夜愿乐队MV4K"},{"n":"Y原创音乐","v":"原创音乐MV4K"},{"n":"Y羽泉","v":"羽泉MV4K"},{"n":"Y粤语","v":"粤语MV4K"},{"n":"Y郁可唯","v":"郁可唯MV4K"},{"n":"Y叶倩文","v":"叶倩文MV4K"},{"n":"Y杨坤","v":"杨坤MV4K"},{"n":"Y庾澄庆","v":"庾澄庆MV4K"},{"n":"Y尤长靖","v":"尤长靖MV4K"},{"n":"Y易烊千玺","v":"易烊千玺MV4K"},{"n":"Y袁娅维","v":"袁娅维MV4K"},{"n":"Y杨丞琳","v":"杨丞琳MV4K"},{"n":"Y杨千嬅","v":"杨千嬅MV4K"},{"n":"Y杨宗纬","v":"杨宗纬MV4K"},{"n":"Z周杰伦","v":"周杰伦MV4K"},{"n":"Z张学友","v":"张学友MV4K"},{"n":"Z张信哲","v":"张信哲MV4K"},{"n":"Z张宇","v":"张宇MV4K"},{"n":"Z周华健","v":"周华健MV4K"},{"n":"Z张韶涵","v":"张韶涵MV4K"},{"n":"Z周深","v":"周深MV4K"},{"n":"Z纵贯线","v":"纵贯线MV4K"},{"n":"Z赵雷","v":"赵雷MV4K"},{"n":"Z周传雄","v":"周传雄MV4K"},{"n":"Z张国荣","v":"张国荣MV4K"},{"n":"Z周慧敏","v":"周慧敏MV4K"},{"n":"Z张惠妹","v":"张惠妹MV4K"},{"n":"Z周笔畅","v":"周笔畅MV4K"},{"n":"Z郑中基","v":"郑中基MV4K"},{"n":"Z张艺兴","v":"张艺兴MV4K"},{"n":"Z张震岳","v":"张震岳MV4K"},{"n":"Z中国好声音","v":"中国好声音MV4K"},{"n":"Z张雨生","v":"张雨生MV4K"},{"n":"Z郑智化","v":"郑智化MV4K"},{"n":"Z卓依婷","v":"卓依婷MV4K"},{"n":"Z中岛美雪","v":"中岛美雪MV4K"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
@@ -100,7 +96,8 @@ var rule = {
         "热门":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"热门"},{"n":"刀郎","v":"刀郎"},{"n":"罗刹海市","v":"罗刹海市"},{"n":"狂飙","v":"狂飙"},{"n":"淄博烧烤","v":"淄博烧烤"},{"n":"原神","v":"原神"},{"n":"漫长的季节","v":"漫长的季节"},{"n":"AI","v":"AI"},{"n":"俄乌","v":"俄乌"},{"n":"ChatGPT","v":"ChatGPT"},{"n":"重启人生","v":"重启人生"},{"n":"棋手战鹰","v":"棋手战鹰"},{"n":"中国奇谭","v":"中国奇谭"},{"n":"三体","v":"三体"},{"n":"刘慈欣","v":"刘慈欣"},{"n":"鬼吹灯","v":"鬼吹灯"},{"n":"天下霸唱","v":"天下霸唱"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}],
         "旅行探险":[{"key":"order","name":"排序","value":[{"n":"综合排序","v":"0"},{"n":"最多点击","v":"click"},{"n":"最新发布","v":"pubdate"},{"n":"最多弹幕","v":"dm"},{"n":"最多收藏","v":"stow"}]},{"key":"tid","name":"分类","value":[{"n":"全部","v":"旅行探险"},{"n":"摩旅","v":"摩托车旅游"},{"n":"骑行","v":"骑行旅游"},{"n":"徒步旅游","v":"徒步旅游"},{"n":"自驾旅游","v":"自驾旅游"},{"n":"洞穴探险","v":"洞穴探险"},{"n":"荒野求生","v":"荒野求生"},{"n":"凶宅探险","v":"凶宅探险"},{"n":"灵异探险","v":"灵异探险"},{"n":"户外攀岩","v":"户外攀岩"},{"n":"高空攀爬","v":"高空攀爬"},{"n":"潜水探险","v":"潜水探险"},{"n":"翼装飞行","v":"翼装飞行"},{"n":"极限运动","v":"极限运动"},{"n":"速降","v":"速降"},{"n":"高空跑酷","v":"高空跑酷"},{"n":"冲浪","v":"冲浪"}]},{"key":"duration","name":"时长","value":[{"n":"全部","v":"0"},{"n":"60分钟以上","v":"4"},{"n":"30~60分钟","v":"3"},{"n":"10~30分钟","v":"2"},{"n":"10分钟以下","v":"1"}]}]
     },
-    detailUrl:'/x/web-interface/view?aid=fyid',//二级详情拼接链接(json格式用)
+    // detailUrl:'/x/web-interface/view?aid=fyid',//二级详情拼接链接(json格式用)
+    detailUrl:'/x/web-interface/view/detail?aid=fyid',//二级详情拼接链接(json格式用)
     searchUrl:'/x/web-interface/search/type?search_type=video&keyword=**&page=fypage',
     searchable:2,
     quickSearch:0,
@@ -109,13 +106,14 @@ var rule = {
         "Referer": "https://www.bilibili.com",
         // "Cookie":"$bili_cookie"
         // "Cookie":"https://ghproxy.net/https://github.com/FongMi/CatVodSpider/raw/main/txt/cookie.txt"
-        "cookie": "http://127.0.0.1:9978/file/tvfan/cookie.txt"
+        "Cookie":"http://127.0.0.1:9978/file/tvfan/cookie.txt"
     },
     timeout:5000,
     limit:8,
     play_parse:true,
     lazy:`js:
         let ids = input.split('_');
+        let dan = 'https://api.bilibili.com/x/v1/dm/list.so?oid=' + ids[1];
         let result = {};
         let iurl = 'https://api.bilibili.com:443/x/player/playurl?avid=' + ids[0] + '&cid=' + ids[1] + '&qn=116';
         let html = request(iurl);
@@ -144,20 +142,306 @@ var rule = {
             'Referer': 'https://live.bilibili.com',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
         };
-        result.contentType = 'video/x-flv';
+        if (/\\.flv/.test(purl)) {
+            result.contentType = 'video/x-flv';
+        } else {
+            result.contentType = '';
+        }
+        result.danmaku = dan;
         input = result
     `,
     double:false,
-    推荐:'*',
+    // 推荐:'*',
+    推荐:`js:
+        function stripHtmlTag(src) {
+            return src.replace(/<\\/?[^>]+(>|$)/g, '').replace(/&.{1,5};/g, '').replace(/\\s{2,}/g, ' ');
+        }
+        function turnDHM(duration) {
+            let min = '';
+            let sec = '';
+            try {
+                min = duration.split(':')[0];
+                sec = duration.split(':')[1];
+            } catch (e) {
+                if (duration >= 3600) {
+                    let rSAH = duration % 3600;
+                    min = Math.floor(rSAH / 60);
+                    sec = rSAH % 60;
+                } else {
+                    min = Math.floor(duration / 60);
+                    sec = duration % 60;
+                }
+            }
+            if (isNaN(parseInt(duration))) {
+                return '无效输入';
+            }
+            if (min == 0) {
+                return sec + '秒'
+            } else if (0 < min && min < 60) {
+                return min + '分'
+            } else if (60 <= min && min < 1440) {
+                if (min % 60 == 0) {
+                    let h = min / 60;
+                    return h + '小时'
+                } else {
+                    let h = min / 60;
+                    h = (h + '').split('.')[0];
+                    let m = min % 60;
+                    return h + '小时' + m + '分';
+                }
+            } else if (min >= 1440) {
+                let d = min / 60 / 24;
+                d = (d + '').split('.')[0];
+                let h = min / 60 % 24;
+                h = (h + '').split('.')[0];
+                let m = min % 60;
+                let dhm = '';
+                if (d > 0) {
+                    dhm = d + '天'
+                }
+                if (h >= 1) {
+                    dhm = dhm + h + '小时'
+                }
+                if (m > 0) {
+                    dhm = dhm + m + '分'
+                }
+                return dhm
+            }
+            return null
+        }
+        function ConvertNum(num) {
+            let _ws = Math.pow(10, 1);
+            let _b = 1e4;
+            if (num < _b) {
+                return num.toString();
+            }
+            let _r = '';
+            let _strArg = ['', '万', '亿', '万亿'];
+            let _i = Math.floor(Math.log(num) / Math.log(_b));
+            if (_i > 3) {
+                _i = 3;
+            }
+            _r = Math.floor(num / Math.pow(_b, _i) * _ws) / _ws + _strArg[_i];
+            return _r;
+        }
+        let html = request(input);
+        let vodList = JSON.parse(html).data.list;
+        let videos = [];
+        vodList.forEach(function(vod) {
+            let aid = vod.aid;
+            let title = stripHtmlTag(vod.title);
+            let img = vod.pic;
+            if (img.startsWith('//')) {
+                img = 'https:' + img;
+            }
+            let remark = turnDHM(vod.duration) + ' ▶' + ConvertNum(vod.stat.view) + ' 🆙' + vod.owner.name;
+            videos.push({
+                vod_id: aid,
+                vod_name: title,
+                vod_pic: img,
+                vod_remarks: remark
+            })
+        });
+        VODS = videos
+    `,
     // 一级:'js:let html=request(input);let msg=JSON.parse(html).message;function title_rep(title){if(/keyword/.test(title)){title=title.replace(\'<em class="keyword">\',"").replace("</em>","").replace("&quot;","\'");log("名称替换👉"+title)};return title}if(msg!=="0"){VODS=[{vod_name:KEY+"➢"+msg,vod_id:"no_data",vod_remarks:"别点,缺少bili_cookie",vod_pic:"https://ghproxy.net/https://raw.githubusercontent.com/hjdhnx/dr_py/main/404.jpg"}]}else{let videos=[];let vodList=JSON.parse(html).data.result;vodList.forEach(function(vod){let aid=vod["aid"];let title=vod["title"].trim();title=title_rep(title);title=title_rep(title);title=title_rep(title);title=title_rep(title);let img="https:"+vod["pic"];let remark=vod["duration"];videos.push({vod_id:aid,vod_name:title,vod_pic:img,vod_remarks:remark})});VODS=videos}',
     一级:`js:
+        function stripHtmlTag(src) {
+            return src.replace(/<\\/?[^>]+(>|$)/g, '').replace(/&.{1,5};/g, '').replace(/\\s{2,}/g, ' ');
+        }
+        function turnDHM(duration) {
+            let min = '';
+            let sec = '';
+            try {
+                min = duration.split(':')[0];
+                sec = duration.split(':')[1];
+            } catch (e) {
+                if (duration >= 3600) {
+                    let rSAH = duration % 3600;
+                    min = Math.floor(rSAH / 60);
+                    sec = rSAH % 60;
+                } else {
+                    min = Math.floor(duration / 60);
+                    sec = duration % 60;
+                }
+            }
+            if (isNaN(parseInt(duration))) {
+                return '无效输入';
+            }
+            if (min == 0) {
+                return sec + '秒'
+            } else if (0 < min && min < 60) {
+                return min + '分'
+            } else if (60 <= min && min < 1440) {
+                if (min % 60 == 0) {
+                    let h = min / 60;
+                    return h + '小时'
+                } else {
+                    let h = min / 60;
+                    h = (h + '').split('.')[0];
+                    let m = min % 60;
+                    return h + '小时' + m + '分';
+                }
+            } else if (min >= 1440) {
+                let d = min / 60 / 24;
+                d = (d + '').split('.')[0];
+                let h = min / 60 % 24;
+                h = (h + '').split('.')[0];
+                let m = min % 60;
+                let dhm = '';
+                if (d > 0) {
+                    dhm = d + '天'
+                }
+                if (h >= 1) {
+                    dhm = dhm + h + '小时'
+                }
+                if (m > 0) {
+                    dhm = dhm + m + '分'
+                }
+                return dhm
+            }
+            return null
+        }
+        function ConvertNum(num) {
+            let _ws = Math.pow(10, 1);
+            let _b = 1e4;
+            if (num < _b) {
+                return num.toString();
+            }
+            let _r = '';
+            let _strArg = ['', '万', '亿', '万亿'];
+            let _i = Math.floor(Math.log(num) / Math.log(_b));
+            if (_i > 3) {
+                _i = 3;
+            }
+            _r = Math.floor(num / Math.pow(_b, _i) * _ws) / _ws + _strArg[_i];
+            return _r;
+        }
+        let data = [];
+        let vodList = [];
+        if (MY_CATE === '推荐') {
+            input = HOST + '/x/web-interface/index/top/rcmd?ps=14&fresh_idx=' + MY_PAGE + '&fresh_idx_1h=' + MY_PAGE;
+            data = JSON.parse(request(input)).data;
+            vodList = data.item;
+        } else {
+            data = JSON.parse(request(input)).data;
+            vodList = data.result;
+        }
+        let videos = [];
+        vodList.forEach(function(vod) {
+            let aid = vod.aid?vod.aid:vod.id;
+            let title = stripHtmlTag(vod.title);
+            let img = vod.pic;
+            if (img.startsWith('//')) {
+                img = 'https:' + img;
+            }
+            let play = '';
+            let danmaku = ''
+            if (MY_CATE === '推荐') {
+                play = ConvertNum(vod.stat.view);
+                danmaku = vod.stat.danmaku;
+            } else {
+                play = ConvertNum(vod.play);
+                danmaku = vod.video_review;
+            }
+            let remark = turnDHM(vod.duration) + ' ▶' + play + ' 💬' + danmaku;
+            videos.push({
+                vod_id: aid,
+                vod_name: title,
+                vod_pic: img,
+                vod_remarks: remark
+            })
+        });
+        VODS = videos
+    `,
+    二级:`js:
+        function stripHtmlTag(src) {
+            return src.replace(/<\\/?[^>]+(>|$)/g, '').replace(/&.{1,5};/g, '').replace(/\\s{2,}/g, ' ');
+        }
+        let html = request(input);
+        let jo = JSON.parse(html).data.View;
+        let stat = jo.stat;
+        let up_info = JSON.parse(html).data.Card;
+        let relation = up_info.following ? '已关注' : '未关注';
+        let aid = jo.aid;
+        let title = stripHtmlTag(jo.title);
+        let pic = jo.pic;
+        let desc = jo.desc;
+
+        let date = new Date(jo.pubdate * 1000);
+        let yy = date.getFullYear().toString();
+        let mm = date.getMonth()+1;
+        mm = mm < 10 ? ('0' + mm) : mm;
+        let dd = date.getDate();
+        dd = dd < 10 ? ('0' + dd) : dd;
+
+        let up_name = jo.owner.name;
+        let typeName = jo.tname;
+        // let remark = jo.duration;
+        let vod = {
+            vod_id: aid,
+            vod_name: title,
+            vod_pic: pic,
+            type_name: typeName,
+            vod_year: yy+mm+dd,
+            vod_area: 'bilidanmu',
+            // vod_remarks: remark,
+            vod_tags: 'mv',
+            vod_director: '🆙 ' + up_name + '　👥 ' + up_info.follower + '　' + relation,
+            vod_actor: '▶' + stat.view + '　' + '💬' + stat.danmaku + '　' + '👍' + stat.like + '　' + '💰' + stat.coin + '　' + '⭐' + stat.favorite,
+            vod_content: desc
+        };
+        let ja = jo.pages;
+        let treeMap = {};
+        let playurls = [];
+        ja.forEach(function(tmpJo) {
+            let cid = tmpJo.cid;
+            let part = tmpJo.part.replace('#', '﹟').replace('$', '﹩');
+            playurls.push(
+                part + '$' + aid + '_' + cid
+            )
+        });
+        treeMap['B站'] = playurls.join('#');
+        let relatedData = JSON.parse(html).data.Related;
+        playurls = [];
+        relatedData.forEach(function(rd) {
+            let ccid = rd.cid;
+            let title = rd.title.replace('#', '﹟').replace('$', '﹩');
+            let aaid = rd.aid;
+            playurls.push(
+                title + '$' + aaid + '_' + ccid
+            )
+        });
+        treeMap['相关推荐'] = playurls.join('#');
+        vod.vod_play_from = Object.keys(treeMap).join("$$$");
+        vod.vod_play_url = Object.values(treeMap).join("$$$");
+        VOD = vod;
+    `,
+    // 搜索:'*',
+    搜索:`js:
         let html = request(input);
         function stripHtmlTag(src) {
             return src.replace(/<\\/?[^>]+(>|$)/g, '').replace(/&.{1,5};/g, '').replace(/\\s{2,}/g, ' ');
         }
         function turnDHM(duration) {
-            let min = duration.split(':')[0];
-            let sec = duration.split(':')[1];
+            let min = '';
+            let sec = '';
+            try {
+                min = duration.split(':')[0];
+                sec = duration.split(':')[1];
+            } catch (e) {
+                if (duration >= 3600) {
+                    let rSAH = duration % 3600;
+                    min = Math.floor(rSAH / 60);
+                    sec = rSAH % 60;
+                } else {
+                    min = Math.floor(duration / 60);
+                    sec = duration % 60;
+                }
+            }
+            if (isNaN(parseInt(duration))) {
+                return '无效输入';
+            }
             if (min == 0) {
                 return sec + '秒'
             } else if (0 < min && min < 60) {
@@ -197,7 +481,10 @@ var rule = {
         vodList.forEach(function(vod) {
             let aid = vod.aid;
             let title = stripHtmlTag(vod.title);
-            let img = 'https:' + vod.pic;
+            let img = vod.pic;
+            if (img.startsWith('//')) {
+                img = 'https:' + img;
+            }
             let remark = turnDHM(vod.duration);
             videos.push({
                 vod_id: aid,
@@ -208,46 +495,5 @@ var rule = {
         });
         VODS = videos
     `,
-    二级:`js:
-        function stripHtmlTag(src) {
-            return src.replace(/<\\/?[^>]+(>|$)/g, '').replace(/&.{1,5};/g, '').replace(/\\s{2,}/g, ' ');
-        }
-        let html = request(input);
-        let jo = JSON.parse(html).data;
-        let aid = jo.aid;
-        let title = stripHtmlTag(jo.title);
-        let pic = jo.pic;
-        let desc = jo.desc;
-        let year = jo.pubdate;
-        let dire = jo.owner.name;
-        let typeName = jo.tname;
-        let remark = jo.duration;
-        let vod = {
-            vod_id: aid,
-            vod_name: title,
-            vod_pic: pic,
-            type_name: typeName,
-            vod_year: year,
-            vod_area: 'bilidanmu',
-            vod_remarks: remark,
-            vod_tags: 'mv',
-            vod_director: dire,
-            vod_content: desc
-        };
-        let ja = jo.pages;
-        let playurls = [];
-        ja.forEach(function(tmpJo) {
-            let cid = tmpJo.cid;
-            let part = tmpJo.part.replace('#', '﹟').replace('$', '﹩');
-            playurls.push(
-                part + '$' + aid + '_' + cid
-            )
-        });
-        let playUrl = playurls.join('#');
-        vod.vod_play_from = 'B站';
-        vod.vod_play_url = playUrl;
-        VOD = vod;
-    `,
-    搜索:'*',
     // 预处理:'if(rule_fetch_params.headers.Cookie.startsWith("http")){rule_fetch_params.headers.Cookie=fetch(rule_fetch_params.headers.Cookie);setItem(RULE_CK,cookie)};log(rule_fetch_params.headers.Cookie)',
 }
